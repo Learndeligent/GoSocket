@@ -44,7 +44,6 @@ void dosomething(int fd)
     }
 }
 
-
 int main(int argc, char const *argv[])
 {
     if (signal(SIGINT, signal_handler) == SIG_ERR)

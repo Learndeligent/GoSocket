@@ -1,3 +1,7 @@
+.vscode/*
+bin/*
+nohup.out
+
 # Prerequisites
 *.d
 
