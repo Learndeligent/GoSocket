@@ -7,7 +7,7 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 
-#define SERVER_PORT 8888
+#define SERVER_PORT 8080
 #define SERVER_IP 127.0.0.1
 
 void out_clientinfo(const struct sockaddr_in* outsockaddr)
@@ -17,7 +17,7 @@ void out_clientinfo(const struct sockaddr_in* outsockaddr)
     // 将地址从网络字节序转换为点分十进制
     inet_ntop(AF_INET, &outsockaddr->sin_addr.s_addr, ipstr, sizeof(ipstr));
     
-    printf("Connected by %s(%d), AF_INET = %d(ipv4=2)\n", ipstr, ntohs(outsockaddr->sin_port), outsockaddr->sin_family);
+    printf("Connect to %s(%d), AF_INET = %d(ipv4=2)\n", ipstr, ntohs(outsockaddr->sin_port), outsockaddr->sin_family);
 }
 
 int main(int argc, char const *argv[])
@@ -51,6 +51,9 @@ int main(int argc, char const *argv[])
         perror("connect error");
         exit(1);
     }
+
+    char sendata[] = "hello world";
+    send(socketfd, sendata, strlen(sendata), 0);
     
     //3 read write
     char buf[1024];
